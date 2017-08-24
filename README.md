@@ -1,3 +1,5 @@
+[![Release](https://jitpack.io/v/brigade/MaterialEditText.svg)](https://jitpack.io/#brigade/MaterialEditText)
+
 MaterialEditText
 ================
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialEditText-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1085)
