@@ -67,6 +67,19 @@
     <attr name="met_validateOnFocusLost" format="boolean"/>
     <!-- Whether check the characters count at the beginning it's shown. True by default. -->
     <attr name="met_checkCharactersCountAtBeginning" format="boolean"/>
-
+    <!-- Always show counter. False by default.-->
+    <attr name="met_counterAlwaysVisible" format="boolean"/>
+    <!-- On error underline color changed to error color -->
+    <attr name="met_underlineHasErrorColor" format="boolean"/>
+    <!-- On error floating label uses error color -->
+    <attr name="met_floatingLabelShowsErrorColor" format="boolean"/>
+    <!-- On error text uses error color -->
+    <attr name="met_textUsesErrorColorOnError" format="boolean"/>
+    <!-- Show helper text on error only -->
+    <attr name="met_onlyShowHelperTextOnError" format="boolean"/>
+    <!-- Background drawable -->
+    <attr name="met_background" format="reference"/>
+    <!-- TextArea mode. Style as a TextArea -->
+    <attr name="met_textAreaMode" format="boolean"/>
   </declare-styleable>
 </resources>
