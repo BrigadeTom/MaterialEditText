@@ -6,9 +6,10 @@
   <dimen name="inner_padding_right">0dp</dimen>
   <dimen name="floating_label_text_size">12sp</dimen>
   <dimen name="bottom_text_size">12sp</dimen>
-  <dimen name="inner_components_spacing">4dp</dimen>
+  <dimen name="inner_components_spacing">5dp</dimen>
+  <dimen name="inner_components_spacing_text_area_no_counter">20dp</dimen>
   <dimen name="bottom_ellipsis_height">4dp</dimen>
   <dimen name="text_area_top_padding">25dp</dimen>
-  <dimen name="text_area_bottom_padding">15dp</dimen>
+  <dimen name="text_area_bottom_padding">20dp</dimen>
   <dimen name="text_area_left_and_right_padding">15dp</dimen>
 </resources>

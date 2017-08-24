@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -354,8 +355,6 @@ public class MaterialEditText extends AppCompatEditText {
     iconSize = getPixel(32);
     iconOuterWidth = getPixel(48);
     iconOuterHeight = getPixel(32);
-
-    bottomSpacing = getResources().getDimensionPixelSize(R.dimen.inner_components_spacing);
     bottomEllipsisSize = getResources().getDimensionPixelSize(R.dimen.bottom_ellipsis_height);
 
     // default baseColor is black
@@ -420,6 +419,12 @@ public class MaterialEditText extends AppCompatEditText {
     if (floatingLabelText == null) {
       floatingLabelText = getHint();
     }
+
+    @DimenRes final int innerComponentSpacing =
+            (useTextAreaMode && !hasCharactersCounter()) ? R.dimen.inner_components_spacing_text_area_no_counter
+                                                         : R.dimen.inner_components_spacing;
+    bottomSpacing = getResources().getDimensionPixelSize(innerComponentSpacing);
+
     floatingLabelPadding = useTextAreaMode ? getResources().getDimensionPixelSize(R.dimen.text_area_top_padding) :
                            typedArray.getDimensionPixelSize(R.styleable.MaterialEditText_met_floatingLabelPadding, bottomSpacing);
     floatingLabelTextSize = typedArray.getDimensionPixelSize(R.styleable.MaterialEditText_met_floatingLabelTextSize, getResources().getDimensionPixelSize(R.dimen.floating_label_text_size));
@@ -1371,7 +1376,7 @@ public class MaterialEditText extends AppCompatEditText {
       String charactersCounterText = getCharactersCounterText();
       float lineStartX = isRTL() ? startX : endX - textPaint.measureText(charactersCounterText);
       if (useTextAreaMode) lineStartX += getResources().getDimensionPixelSize(R.dimen.text_area_left_and_right_padding);
-      canvas.drawText(charactersCounterText, lineStartX, lineStartY + 2 * bottomSpacing + relativeHeight, textPaint);
+      canvas.drawText(charactersCounterText, lineStartX, lineStartY + 1.5f * bottomSpacing + relativeHeight, textPaint);
     }
 
     // draw the bottom text
@@ -1381,9 +1386,13 @@ public class MaterialEditText extends AppCompatEditText {
         textPaint.setColor((tempErrorText != null || onlyShowHelperTextOnError) ? errorColor : helperTextColor != -1 ? helperTextColor : (baseColor & 0x00ffffff | 0x44000000));
         canvas.save();
         if (isRTL()) {
-          canvas.translate(endX - textLayout.getWidth(), lineStartY + 2 * bottomSpacing - bottomTextPadding);
+          int dx = endX - textLayout.getWidth();
+          if (useTextAreaMode) dx -= getResources().getDimensionPixelSize(R.dimen.text_area_left_and_right_padding);
+          canvas.translate(dx, lineStartY + 1.5f * bottomSpacing - bottomTextPadding);
         } else {
-          canvas.translate(startX + getBottomTextLeftOffset(), lineStartY + 2 * bottomSpacing - bottomTextPadding);
+          int dx = startX + getBottomTextLeftOffset();
+          if (useTextAreaMode) dx -= getResources().getDimensionPixelSize(R.dimen.text_area_left_and_right_padding);
+          canvas.translate(dx, lineStartY + 1.5f * bottomSpacing - bottomTextPadding);
         }
         textLayout.draw(canvas);
         canvas.restore();
